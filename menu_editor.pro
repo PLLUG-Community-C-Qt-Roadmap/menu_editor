@@ -11,6 +11,7 @@ greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 TARGET = menu_editor
 TEMPLATE = app
 
+CONFIG += c++11
 
 SOURCES += main.cpp\
         mainwindow.cpp \
@@ -18,7 +19,8 @@ SOURCES += main.cpp\
     composite.cpp \
     menu.cpp \
     menuitem.cpp \
-    menuiterator.cpp
+    menuiterator.cpp \
+    texteditprintmenuvisitor.cpp
 
 HEADERS  += mainwindow.h \
     consoleprintmenuvisitor.h \
@@ -26,6 +28,7 @@ HEADERS  += mainwindow.h \
     menu.h \
     menuitem.h \
     menuiterator.h \
-    menuvisitor.h
+    menuvisitor.h \
+    texteditprintmenuvisitor.h
 
 FORMS    += mainwindow.ui
