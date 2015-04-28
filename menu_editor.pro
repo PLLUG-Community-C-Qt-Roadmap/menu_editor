@@ -13,8 +13,19 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp
+        mainwindow.cpp \
+    consoleprintmenuvisitor.cpp \
+    composite.cpp \
+    menu.cpp \
+    menuitem.cpp \
+    menuiterator.cpp
 
-HEADERS  += mainwindow.h
+HEADERS  += mainwindow.h \
+    consoleprintmenuvisitor.h \
+    composite.h \
+    menu.h \
+    menuitem.h \
+    menuiterator.h \
+    menuvisitor.h
 
 FORMS    += mainwindow.ui
