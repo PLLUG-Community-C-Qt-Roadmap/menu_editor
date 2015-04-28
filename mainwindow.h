@@ -2,7 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-
+class Menu;
 namespace Ui {
 class MainWindow;
 }
@@ -14,9 +14,11 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
+public slots:
+    void slotPrintMenu();
 private:
     Ui::MainWindow *ui;
+    Menu *mRoot;
 };
 
 #endif // MAINWINDOW_H
