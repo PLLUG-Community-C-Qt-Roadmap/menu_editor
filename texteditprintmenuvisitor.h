@@ -2,7 +2,8 @@
 #define TEXTEDITPRINTMENUVISITOR_H
 
 #include "menuvisitor.h"
-#include <string>
+
+#include<QString>
 
 class Composite;
 class QPlainTextEdit;
@@ -18,7 +19,7 @@ public:
 
 private:
     QPlainTextEdit *mTextEdit;
-    std::string indent(Composite *item) const;
+    QString indent(Composite *item) const;
 };
 
 

@@ -14,8 +14,13 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+
 public slots:
     void slotPrintMenu();
+
+private:
+    void createMenu();
+
 private:
     Ui::MainWindow *ui;
     Menu *mRoot;

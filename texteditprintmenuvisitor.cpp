@@ -1,26 +1,26 @@
 #include "texteditprintmenuvisitor.h"
+
 #include <QPlainTextEdit>
 
 #include "menuitem.h"
 #include "menu.h"
-#include <QString>
-#include <iostream>
-TextEditPrintMenuVisitor::TextEditPrintMenuVisitor(QPlainTextEdit *textEdit):mTextEdit{textEdit}
+
+TextEditPrintMenuVisitor::TextEditPrintMenuVisitor(QPlainTextEdit *textEdit)
+        : mTextEdit{textEdit}
 {
 
 }
-
 
 /*!
  * \brief TextEditPrintMenuVisitor::indent
  * \param item
  * \return
  */
-std::string TextEditPrintMenuVisitor::indent(Composite *item) const
+QString TextEditPrintMenuVisitor::indent(Composite *item) const
 {
-    std::string rIndentString;
+    QString rIndentString;
 
-    std::string lIndentStep = "    ";
+    QString lIndentStep("    ");
     Composite *lMenuItem = item->parent();
     while (lMenuItem)
     {
@@ -37,13 +37,18 @@ std::string TextEditPrintMenuVisitor::indent(Composite *item) const
  */
 void TextEditPrintMenuVisitor::visit(MenuItem *item)
 {
-    std::string lIndentString = indent(item);
+    QString outString;
 
-    std::cout << lIndentString << "> " << item->title() << "    :        " << item->price() << "$" << std::endl;
+    QString lIndentString = indent(item);
+
+    outString = QString("%1 > %2    %3$").arg(lIndentString).arg(item->title().c_str()).arg(item->price());
+    mTextEdit->appendPlainText(outString);
 
     if (!item->description().empty())
     {
-        std::cout << lIndentString << "    ::::" << item->description() << "::::" << std::endl;
+        QString description;
+        description = QString("%1   ::::%2::::").arg(lIndentString).arg(item->description().c_str());
+        mTextEdit->appendPlainText(description);
     }
 }
 
@@ -55,6 +60,7 @@ void TextEditPrintMenuVisitor::visit(Menu *menu)
 {
 //    std::cout << indent(menu) << "[" << menu->title() << "]" << std::endl;
     QString outString;
-    outString = QString("[%1]").arg(menu->title().c_str());
+    QString lIndentString = indent(menu);
+    outString = QString("%2[%1]").arg(menu->title().c_str()).arg(lIndentString);
     mTextEdit->appendPlainText(outString);
 }
