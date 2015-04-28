@@ -3,7 +3,7 @@
 
 #include "menuitem.h"
 #include "menu.h"
-
+#include <QString>
 #include <iostream>
 TextEditPrintMenuVisitor::TextEditPrintMenuVisitor(QPlainTextEdit *textEdit):mTextEdit{textEdit}
 {
@@ -53,5 +53,8 @@ void TextEditPrintMenuVisitor::visit(MenuItem *item)
  */
 void TextEditPrintMenuVisitor::visit(Menu *menu)
 {
-    std::cout << indent(menu) << "[" << menu->title() << "]" << std::endl;
+//    std::cout << indent(menu) << "[" << menu->title() << "]" << std::endl;
+    QString outString;
+    outString = QString("[%1]").arg(menu->title().c_str());
+    mTextEdit->appendPlainText(outString);
 }
