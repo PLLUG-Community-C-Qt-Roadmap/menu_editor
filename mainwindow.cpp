@@ -14,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     createMenu();
+    ui->comboBox->setMenu(mRoot);
     slotPrintMenu();
 }
 

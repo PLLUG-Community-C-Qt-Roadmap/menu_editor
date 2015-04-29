@@ -23,10 +23,10 @@
       <widget class="QWidget" name="">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="QComboBox" name="comboBox"/>
+         <widget class="MenuComboBox" name="comboBox"/>
         </item>
         <item>
-         <widget class="QWidget" name="widget" native="true"/>
+         <widget class="EditorDelegate" name="widget" native="true"/>
         </item>
        </layout>
       </widget>
@@ -109,6 +109,19 @@
   </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <customwidgets>
+  <customwidget>
+   <class>MenuComboBox</class>
+   <extends>QComboBox</extends>
+   <header>menucombobox.h</header>
+  </customwidget>
+  <customwidget>
+   <class>EditorDelegate</class>
+   <extends>QWidget</extends>
+   <header>editordelegate.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources/>
  <connections>
   <connection>

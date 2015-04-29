@@ -20,7 +20,9 @@ SOURCES += main.cpp\
     menu.cpp \
     menuitem.cpp \
     menuiterator.cpp \
-    texteditprintmenuvisitor.cpp
+    texteditprintmenuvisitor.cpp \
+    menucombobox.cpp \
+    editordelegate.cpp
 
 HEADERS  += mainwindow.h \
     consoleprintmenuvisitor.h \
@@ -29,6 +31,9 @@ HEADERS  += mainwindow.h \
     menuitem.h \
     menuiterator.h \
     menuvisitor.h \
-    texteditprintmenuvisitor.h
+    texteditprintmenuvisitor.h \
+    menucombobox.h \
+    editordelegate.h
 
-FORMS    += mainwindow.ui
+FORMS    += mainwindow.ui \
+    editordelegate.ui
