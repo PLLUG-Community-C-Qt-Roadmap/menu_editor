@@ -9,6 +9,11 @@ EditorDelegate::EditorDelegate(QWidget *parent) :
     ui(new Ui::EditorDelegate)
 {
     ui->setupUi(this);
+    connect(ui->menuItemNameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotEdited()), Qt::UniqueConnection);
+    connect(ui->menuItemDescriptionLineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotEdited()), Qt::UniqueConnection);
+    connect(ui->menuItemPriceSpinBox, SIGNAL(valueChanged(double)), this, SLOT(slotEdited()), Qt::UniqueConnection);
+    connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(slotSave()), Qt::UniqueConnection);
+    ui->pushButton->setEnabled(false);
 }
 
 EditorDelegate::~EditorDelegate()
@@ -18,21 +23,22 @@ EditorDelegate::~EditorDelegate()
 
 void EditorDelegate::visit(MenuItem *item)
 {
+    clear();
+
     ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
     ui->menuItemNameLineEdit->setText(item->title().c_str());
     ui->menuItemDescriptionLineEdit->setText(item->description().c_str());
     ui->menuItemPriceSpinBox->setValue(item->price());
 
-    clear();
     mEditedMenuItem = item;
 }
 
 void EditorDelegate::visit(Menu *menu)
 {
+    clear();
+
     ui->stackedWidget->setCurrentWidget(ui->pageMenu);
 
-
-    clear();
     mEditedMenu = menu;
 }
 
@@ -40,19 +46,22 @@ void EditorDelegate::clear()
 {
     mEditedMenu = nullptr;
     mEditedMenuItem = nullptr;
+    ui->pushButton->setEnabled(false);
 }
 
-void EditorDelegate::slotMenuItemTitleChanged(const QString &title)
+void EditorDelegate::slotSave()
 {
-    mEditedMenuItem->setTitle(title.toStdString());
+    if (mEditedMenuItem)
+    {
+        mEditedMenuItem->setTitle(ui->menuItemNameLineEdit->text().toStdString());
+        mEditedMenuItem->setDescription(ui->menuItemDescriptionLineEdit->text().toStdString());
+        mEditedMenuItem->setPrice(ui->menuItemPriceSpinBox->value());
+        ui->pushButton->setEnabled(false);
+        emit itemChanged();
+    }
 }
 
-void EditorDelegate::slotMenuItemDescriptionChanged(const QString &description)
+void EditorDelegate::slotEdited()
 {
-    mEditedMenuItem->setDescription(description.toStdString());
-}
-
-void EditorDelegate::slotMenuItemPriceCahnged(double price)
-{
-    mEditedMenuItem->setPrice(price);
+    ui->pushButton->setEnabled(true);
 }

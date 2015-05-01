@@ -22,6 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(menuElementSelected()), Qt::UniqueConnection);
     connect(ui->action_Add, SIGNAL(triggered(bool)),
             this, SLOT(slotAddNewItem()), Qt::UniqueConnection);
+    connect(ui->menuEditorDelegate, SIGNAL(itemChanged()),
+            this, SLOT(slotUpdateMenu()));
 }
 
 MainWindow::~MainWindow()
@@ -51,8 +53,10 @@ void MainWindow::menuElementSelected()
 
 void MainWindow::slotUpdateMenu()
 {
+    int index = ui->menuComboBox->currentIndex();
     ui->menuComboBox->setMenu(mRoot);
     slotPrintMenu();
+    ui->menuComboBox->setCurrentIndex(index);
 }
 
 void MainWindow::slotAddNewItem()

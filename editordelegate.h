@@ -25,10 +25,8 @@ signals:
     void itemChanged();
 
 private slots:
-    void slotMenuItemTitleChanged(const QString &);
-    void slotMenuItemDescriptionChanged(const QString &);
-    void slotMenuItemPriceCahnged(double);
-
+    void slotSave();
+    void slotEdited();
 
 private:
     Ui::EditorDelegate *ui;
