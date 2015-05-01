@@ -25,9 +25,9 @@ public:
     virtual void accept(MenuVisitor *visitor) = 0;
 
 private:
+    std::string mTitle;
     Composite *mParent;
     std::vector<Composite *> mListSubitems;
-    std::string mTitle;
 };
 
 #endif // COMPOSITE_H

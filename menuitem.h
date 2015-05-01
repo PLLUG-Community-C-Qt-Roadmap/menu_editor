@@ -23,8 +23,8 @@ public:
     void accept(MenuVisitor *visitor);
 
 private:
-    std::string mDescription;
     double mPrice;
+    std::string mDescription;
 };
 
 #endif // MENUITEM_H

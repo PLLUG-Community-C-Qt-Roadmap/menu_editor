@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     createMenu();
-    ui->comboBox->setMenu(mRoot);
+    ui->menuComboBox->setMenu(mRoot);
     slotPrintMenu();
 
-    connect(ui->comboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(menuElementSelected()));
+    connect(ui->menuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(menuElementSelected()));
 }
 
 MainWindow::~MainWindow()
@@ -28,8 +28,8 @@ MainWindow::~MainWindow()
 
 void MainWindow::slotPrintMenu()
 {
-    ui->plainTextEdit->clear();
-    TextEditPrintMenuVisitor visitor (ui->plainTextEdit);
+    ui->menuTextEdit->clear();
+    TextEditPrintMenuVisitor visitor (ui->menuTextEdit);
     MenuIterator iterator(mRoot);
     while(iterator.hasNext())
     {
@@ -40,8 +40,8 @@ void MainWindow::slotPrintMenu()
 
 void MainWindow::menuElementSelected()
 {
-    Composite * item = ui->comboBox->getCurrentMenuItem();
-    MenuVisitor *visitor = ui->widget1;
+    Composite * item = ui->menuComboBox->getCurrentMenuItem();
+    MenuVisitor *visitor = ui->menuEditorDelegate;
     item->accept(visitor);
 }
 

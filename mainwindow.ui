@@ -20,17 +20,17 @@
       <property name="orientation">
        <enum>Qt::Horizontal</enum>
       </property>
-      <widget class="QWidget" name="">
+      <widget class="QWidget" name="layoutWidget">
        <layout class="QVBoxLayout" name="verticalLayout">
         <item>
-         <widget class="MenuComboBox" name="comboBox"/>
+         <widget class="MenuComboBox" name="menuComboBox"/>
         </item>
         <item>
-         <widget class="EditorDelegate" name="widget" native="true"/>
+         <widget class="EditorDelegate" name="menuEditorDelegate" native="true"/>
         </item>
        </layout>
       </widget>
-      <widget class="QPlainTextEdit" name="plainTextEdit">
+      <widget class="QPlainTextEdit" name="menuTextEdit">
        <property name="font">
         <font>
          <family>Courier New</family>
