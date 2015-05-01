@@ -30,14 +30,19 @@ private slots:
     void slotNextClicked();
     void slotOkClicked();
 
+    void slotChanged();
+
 private:
     void showPage1();
     void showPage2();
+
+    void clear();
 
 private:
     Ui::AddDialog *ui;
     Composite *mRoot;
     Composite *mNewItem;
+    Composite *mParent;
 };
 
 #endif // ADDDIALOG_H

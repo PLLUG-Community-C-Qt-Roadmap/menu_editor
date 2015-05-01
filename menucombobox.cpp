@@ -26,7 +26,7 @@ void MenuComboBox::setMenu(Composite *menu)
     populateComboBox(); // Наповнюємо QComboBox заново
 }
 
-Composite *MenuComboBox::getCurrentMenuItem() const
+Composite *MenuComboBox::currentMenuItem() const
 {
     int itemId = currentData().toInt();
     return mItemByIndex.value(itemId);

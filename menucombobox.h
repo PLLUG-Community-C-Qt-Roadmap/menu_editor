@@ -14,7 +14,7 @@ public:
 
     void setMenu(Composite *menu);
 
-    Composite* getCurrentMenuItem() const;
+    Composite* currentMenuItem() const;
 
 private:
     void populateComboBox();

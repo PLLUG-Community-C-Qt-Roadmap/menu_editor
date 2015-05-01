@@ -49,7 +49,7 @@ void MainWindow::slotPrintMenu()
 void MainWindow::menuElementSelected()
 {
     ui->savePushButton->setEnabled(false);
-    Composite * item = ui->menuComboBox->getCurrentMenuItem();
+    Composite * item = ui->menuComboBox->currentMenuItem();
     MenuVisitor *visitor = ui->menuEditorDelegate;
     item->accept(visitor);
 }
