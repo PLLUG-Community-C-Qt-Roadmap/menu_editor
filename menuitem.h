@@ -18,7 +18,10 @@ public:
     MenuItem(const std::string &pTitle, double pPrice = 0.0, std::string pDescription = std::string());
 
     std::string description() const;
+    void setDescription(const std::string &description);
+
     double price() const;
+    void setPrice(double price);
 
     void accept(MenuVisitor *visitor);
 

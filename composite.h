@@ -21,6 +21,8 @@ public:
     Composite *parent() const;
 
     std::string title() const;
+    void setTitle(const std::string &title);
+
 
     virtual void accept(MenuVisitor *visitor) = 0;
 

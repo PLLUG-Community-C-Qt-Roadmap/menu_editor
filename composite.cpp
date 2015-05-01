@@ -73,3 +73,8 @@ std::string Composite::title() const
 {
     return mTitle;
 }
+
+void Composite::setTitle(const std::string &title)
+{
+    mTitle = title;
+}

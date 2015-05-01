@@ -21,6 +21,15 @@ public:
 
     void clear();
 
+signals:
+    void itemChanged();
+
+private slots:
+    void slotMenuItemTitleChanged(const QString &);
+    void slotMenuItemDescriptionChanged(const QString &);
+    void slotMenuItemPriceCahnged(double);
+
+
 private:
     Ui::EditorDelegate *ui;
 

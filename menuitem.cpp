@@ -25,6 +25,11 @@ std::string MenuItem::description() const
     return mDescription;
 }
 
+void MenuItem::setDescription(const std::string &description)
+{
+    mDescription = description;
+}
+
 /*!
  * \brief MenuItem::price
  * \return price of this menu item
@@ -32,6 +37,11 @@ std::string MenuItem::description() const
 double MenuItem::price() const
 {
     return mPrice;
+}
+
+void MenuItem::setPrice(double price)
+{
+    mPrice = price;
 }
 
 /*!
