@@ -2,6 +2,7 @@
 #define MENUCOMBOBOX_H
 
 #include <QComboBox>
+#include <QHash>
 
 class Composite;
 
@@ -13,11 +14,18 @@ public:
 
     void setMenu(Composite *menu);
 
+    Composite* getCurrentMenuItem() const;
+
 private:
     void populateComboBox();
 
 private:
-    Composite *mRoot;
+    Composite *mRoot; //Кореневий елемент у меню (той елемент який містить усі інші)
+
+    QHash<int, Composite*> mItemByIndex; // Contains pairs: index - menu item.
+    // Used to get menu item using index. When we choose item in combo box,
+    // we will get index of that item (in combo box). Using its index we will
+    // get poiner to certain menu element from QHash.
 };
 
 #endif // MENUCOMBOBOX_H
