@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>400</width>
-    <height>300</height>
+    <width>823</width>
+    <height>554</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,6 +31,12 @@
        </layout>
       </widget>
       <widget class="QPlainTextEdit" name="menuTextEdit">
+       <property name="minimumSize">
+        <size>
+         <width>400</width>
+         <height>0</height>
+        </size>
+       </property>
        <property name="font">
         <font>
          <family>Courier New</family>
@@ -46,7 +52,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>400</width>
+     <width>823</width>
      <height>29</height>
     </rect>
    </property>

@@ -12,6 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     mRoot{nullptr}
 {
     ui->setupUi(this);
+    resize(800, 600);
 
     createMenu();
     ui->menuComboBox->setMenu(mRoot);

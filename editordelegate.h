@@ -19,7 +19,6 @@ public:
     virtual void visit(MenuItem *);
     virtual void visit(Menu *);
 
-
 private:
     Ui::EditorDelegate *ui;
 };

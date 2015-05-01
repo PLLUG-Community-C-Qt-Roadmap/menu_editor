@@ -15,10 +15,10 @@ EditorDelegate::~EditorDelegate()
 
 void EditorDelegate::visit(MenuItem *)
 {
-
+    ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
 }
 
 void EditorDelegate::visit(Menu *)
 {
-
+    ui->stackedWidget->setCurrentWidget(ui->pageMenu);
 }
