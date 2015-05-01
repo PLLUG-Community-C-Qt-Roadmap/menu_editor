@@ -5,6 +5,7 @@
 #include "menuiterator.h"
 #include "menu.h"
 #include "menuitem.h"
+#include "adddialog.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -15,10 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     resize(800, 600);
 
     createMenu();
-    ui->menuComboBox->setMenu(mRoot);
-    slotPrintMenu();
+    slotUpdateMenu();
 
-    connect(ui->menuComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(menuElementSelected()));
+    connect(ui->menuComboBox, SIGNAL(currentIndexChanged(int)),
+            this, SLOT(menuElementSelected()), Qt::UniqueConnection);
+    connect(ui->action_Add, SIGNAL(triggered(bool)),
+            this, SLOT(slotAddNewItem()), Qt::UniqueConnection);
 }
 
 MainWindow::~MainWindow()
@@ -44,6 +47,28 @@ void MainWindow::menuElementSelected()
     Composite * item = ui->menuComboBox->getCurrentMenuItem();
     MenuVisitor *visitor = ui->menuEditorDelegate;
     item->accept(visitor);
+}
+
+void MainWindow::slotUpdateMenu()
+{
+    ui->menuComboBox->setMenu(mRoot);
+    slotPrintMenu();
+}
+
+void MainWindow::slotAddNewItem()
+{
+    AddDialog addDialog;
+    addDialog.setMenu(mRoot);
+
+    if (addDialog.exec())
+    {
+        Composite *newItem = addDialog.newMenuItem();
+
+        if (newItem)
+        {
+            slotUpdateMenu();
+        }
+    }
 }
 
 void MainWindow::createMenu()

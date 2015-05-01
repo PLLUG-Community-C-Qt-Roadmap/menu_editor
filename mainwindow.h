@@ -22,6 +22,9 @@ public slots:
 private slots:
     void menuElementSelected();
 
+    void slotUpdateMenu();
+    void slotAddNewItem();
+
 private:
     void createMenu();
 

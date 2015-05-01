@@ -13,12 +13,24 @@ EditorDelegate::~EditorDelegate()
     delete ui;
 }
 
-void EditorDelegate::visit(MenuItem *)
+void EditorDelegate::visit(MenuItem *item)
 {
     ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
+
+    clear();
+    mEditedMenuItem = item;
 }
 
-void EditorDelegate::visit(Menu *)
+void EditorDelegate::visit(Menu *menu)
 {
     ui->stackedWidget->setCurrentWidget(ui->pageMenu);
+
+    clear();
+    mEditedMenu = menu;
+}
+
+void EditorDelegate::clear()
+{
+    mEditedMenu = nullptr;
+    mEditedMenuItem = nullptr;
 }

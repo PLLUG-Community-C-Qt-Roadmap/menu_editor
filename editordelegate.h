@@ -19,8 +19,13 @@ public:
     virtual void visit(MenuItem *);
     virtual void visit(Menu *);
 
+    void clear();
+
 private:
     Ui::EditorDelegate *ui;
+
+    Menu *mEditedMenu;
+    MenuItem *mEditedMenuItem;
 };
 
 #endif // EDITORDELEGATE_H
