@@ -9,11 +9,9 @@ EditorDelegate::EditorDelegate(QWidget *parent) :
     ui(new Ui::EditorDelegate)
 {
     ui->setupUi(this);
-    connect(ui->menuItemNameLineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotEdited()), Qt::UniqueConnection);
-    connect(ui->menuItemDescriptionLineEdit, SIGNAL(textChanged(QString)), this, SLOT(slotEdited()), Qt::UniqueConnection);
-    connect(ui->menuItemPriceSpinBox, SIGNAL(valueChanged(double)), this, SLOT(slotEdited()), Qt::UniqueConnection);
-    connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(slotSave()), Qt::UniqueConnection);
-    ui->pushButton->setEnabled(false);
+    connect(ui->menuItemNameLineEdit, SIGNAL(textChanged(QString)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
+    connect(ui->menuItemDescriptionLineEdit, SIGNAL(textChanged(QString)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
+    connect(ui->menuItemPriceSpinBox, SIGNAL(valueChanged(double)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
 }
 
 EditorDelegate::~EditorDelegate()
@@ -23,6 +21,8 @@ EditorDelegate::~EditorDelegate()
 
 void EditorDelegate::visit(MenuItem *item)
 {
+    blockSignals(true);
+
     clear();
 
     ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
@@ -31,22 +31,27 @@ void EditorDelegate::visit(MenuItem *item)
     ui->menuItemPriceSpinBox->setValue(item->price());
 
     mEditedMenuItem = item;
+
+    blockSignals(false);
 }
 
 void EditorDelegate::visit(Menu *menu)
 {
+    blockSignals(true);
+
     clear();
 
     ui->stackedWidget->setCurrentWidget(ui->pageMenu);
 
     mEditedMenu = menu;
+
+    blockSignals(false);
 }
 
 void EditorDelegate::clear()
 {
     mEditedMenu = nullptr;
     mEditedMenuItem = nullptr;
-    ui->pushButton->setEnabled(false);
 }
 
 void EditorDelegate::slotSave()
@@ -56,12 +61,5 @@ void EditorDelegate::slotSave()
         mEditedMenuItem->setTitle(ui->menuItemNameLineEdit->text().toStdString());
         mEditedMenuItem->setDescription(ui->menuItemDescriptionLineEdit->text().toStdString());
         mEditedMenuItem->setPrice(ui->menuItemPriceSpinBox->value());
-        ui->pushButton->setEnabled(false);
-        emit itemChanged();
     }
-}
-
-void EditorDelegate::slotEdited()
-{
-    ui->pushButton->setEnabled(true);
 }

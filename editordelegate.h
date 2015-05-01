@@ -21,12 +21,11 @@ public:
 
     void clear();
 
+public slots:
+    void slotSave();
+
 signals:
     void itemChanged();
-
-private slots:
-    void slotSave();
-    void slotEdited();
 
 private:
     Ui::EditorDelegate *ui;

@@ -22,8 +22,10 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(menuElementSelected()), Qt::UniqueConnection);
     connect(ui->action_Add, SIGNAL(triggered(bool)),
             this, SLOT(slotAddNewItem()), Qt::UniqueConnection);
+    connect(ui->savePushButton, SIGNAL(clicked(bool)),
+            this, SLOT(slotSaveEditedItem()), Qt::UniqueConnection);
     connect(ui->menuEditorDelegate, SIGNAL(itemChanged()),
-            this, SLOT(slotUpdateMenu()));
+            this, SLOT(slotItemChanged()), Qt::UniqueConnection);
 }
 
 MainWindow::~MainWindow()
@@ -46,6 +48,7 @@ void MainWindow::slotPrintMenu()
 
 void MainWindow::menuElementSelected()
 {
+    ui->savePushButton->setEnabled(false);
     Composite * item = ui->menuComboBox->getCurrentMenuItem();
     MenuVisitor *visitor = ui->menuEditorDelegate;
     item->accept(visitor);
@@ -73,6 +76,18 @@ void MainWindow::slotAddNewItem()
             slotUpdateMenu();
         }
     }
+}
+
+void MainWindow::slotItemChanged()
+{
+    ui->savePushButton->setEnabled(true);
+}
+
+void MainWindow::slotSaveEditedItem()
+{
+    ui->savePushButton->setEnabled(false);
+    ui->menuEditorDelegate->slotSave();
+    slotUpdateMenu();
 }
 
 void MainWindow::createMenu()
