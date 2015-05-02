@@ -9,8 +9,11 @@
 #include <QFileDialog>
 #include <QFile>
 #include <QDir>
-#include <QDebug>
 #include <QMessageBox>
+#include <QByteArray>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -95,6 +98,50 @@ void MainWindow::slotSaveEditedItem()
     slotUpdateMenu();
 }
 
+void MainWindow::readFromJSON(const QJsonObject &json, Composite *pRoot)
+{
+    Composite *newMenu;
+
+    // If pRoot isn't first element
+    if(pRoot)
+    {
+        newMenu = new Menu(json["title"].toString().toStdString());
+    }
+    else
+    {
+        mRoot = new Menu(json["title"].toString().toStdString());
+        newMenu = mRoot;
+    }
+
+    QJsonArray subitemsArray = json["children"].toArray();
+    for (int index = 0;index < subitemsArray.size(); ++index)
+    {
+        if(!subitemsArray[index].toObject()["type"].toString().compare("Menu"))
+        {
+            // Filling newMenu recursively with items
+            readFromJSON(subitemsArray[index].toObject(), newMenu);
+
+        }
+        else if(!subitemsArray[index].toObject()["type"].toString().compare("MenuItem"))
+        {
+
+            int lPrice = subitemsArray[index].toObject()["price"].toDouble();
+            std::string lDescription = subitemsArray[index].toObject()["description"].toString().toStdString();
+            std::string lTitle = subitemsArray[index].toObject()["title"].toString().toStdString();
+
+            newMenu->addSubitem( new MenuItem(lTitle, lPrice, lDescription));
+        }
+
+    }
+
+    if(pRoot)
+    {
+        // Adding newMenu as subitem to pRoot
+        pRoot->addSubitem(newMenu);
+    }
+
+}
+
 void MainWindow::on_action_Open_triggered()
 {
     QString lFileName = QFileDialog::getOpenFileName(this, tr("Open file.."), QDir::homePath(),
@@ -108,7 +155,17 @@ void MainWindow::on_action_Open_triggered()
 
     if(lFile.open(QIODevice::ReadOnly))
     {
-        qDebug() << lFileName;
+
+        QByteArray loadedData = lFile.readAll();
+        lFile.close();
+
+        QJsonDocument loadedJSON = QJsonDocument::fromJson(loadedData);
+
+        delete mRoot;
+
+        readFromJSON(loadedJSON.object(), nullptr);
+
+        slotUpdateMenu();
     }
     else
     {
@@ -116,8 +173,6 @@ void MainWindow::on_action_Open_triggered()
               QString(tr("Could not open file %1 for reading")).arg(lFile.fileName()),
               QMessageBox::Ok);
     }
-
-    lFile.close();
 }
 
 void MainWindow::createMenu()

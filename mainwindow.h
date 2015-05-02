@@ -36,6 +36,7 @@ private:
 private:
     Ui::MainWindow *ui;
     Composite *mRoot;
+    void readFromJSON(const QJsonObject &json, Composite *pRoot);
 };
 
 #endif // MAINWINDOW_H
