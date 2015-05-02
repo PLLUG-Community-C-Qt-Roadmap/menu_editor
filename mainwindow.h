@@ -28,6 +28,8 @@ private slots:
     void slotItemChanged();
     void slotSaveEditedItem();
 
+    void on_action_Open_triggered();
+
 private:
     void createMenu();
 

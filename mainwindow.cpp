@@ -6,6 +6,11 @@
 #include "menu.h"
 #include "menuitem.h"
 #include "adddialog.h"
+#include <QFileDialog>
+#include <QFile>
+#include <QDir>
+#include <QDebug>
+#include <QMessageBox>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -88,6 +93,31 @@ void MainWindow::slotSaveEditedItem()
     ui->savePushButton->setEnabled(false);
     ui->menuEditorDelegate->slotSave();
     slotUpdateMenu();
+}
+
+void MainWindow::on_action_Open_triggered()
+{
+    QString lFileName = QFileDialog::getOpenFileName(this, tr("Open file.."), QDir::homePath(),
+                                                     tr("JSON files (*.json)"));
+    if(lFileName.isEmpty())
+    {
+        return;
+    }
+
+    QFile lFile(lFileName);
+
+    if(lFile.open(QIODevice::ReadOnly))
+    {
+        qDebug() << lFileName;
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Error"),
+              QString(tr("Could not open file %1 for reading")).arg(lFile.fileName()),
+              QMessageBox::Ok);
+    }
+
+    lFile.close();
 }
 
 void MainWindow::createMenu()
