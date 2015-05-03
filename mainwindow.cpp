@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(slotSaveEditedItem()), Qt::UniqueConnection);
     connect(ui->menuEditorDelegate, SIGNAL(itemChanged()),
             this, SLOT(slotItemChanged()), Qt::UniqueConnection);
+    connect(ui->actionAbout_Menu_Editor, SIGNAL(triggered(bool)), this, SLOT(slotAboutProgram()));
+    connect(ui->actionAbout_Qt, SIGNAL(triggered(bool)), qApp, SLOT(aboutQt()));
 }
 
 MainWindow::~MainWindow()
@@ -126,3 +128,9 @@ void MainWindow::createMenu()
 
     mRoot->addSubitem(lBeveragesMenu);
 }
+
+void MainWindow::slotAboutProgram()
+{
+    QMessageBox::about(this,tr("About"), QString("%1 v. %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
+}
+

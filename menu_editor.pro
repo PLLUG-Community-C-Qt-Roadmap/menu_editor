@@ -4,6 +4,13 @@
 #
 #-------------------------------------------------
 
+MAJOR_VERSION = 1
+MINOR_VERSION = 0
+
+DEFINES += \
+    MAJOR_VERSION=$$MAJOR_VERSION \
+    MINOR_VERSION=$$MINOR_VERSION
+
 QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
