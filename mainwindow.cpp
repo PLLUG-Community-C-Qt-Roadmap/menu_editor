@@ -208,7 +208,7 @@ QJsonArray MainWindow::writeToJSON(Composite *root)
 
 void MainWindow::on_action_Save_triggered()
 {
-    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."),0,
+    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."),"Menu",
                                              tr("JSON files (*.json)"));
     if(lFileName.isEmpty())
         return;
