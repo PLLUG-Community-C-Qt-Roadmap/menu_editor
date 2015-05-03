@@ -15,8 +15,9 @@
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QDebug>
-#include <typeinfo>
-#include <cxxabi.h>
+#include <QString>
+
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
@@ -176,6 +177,54 @@ void MainWindow::on_action_Open_triggered()
               QMessageBox::Ok);
     }
 }
+QJsonArray MainWindow::writeToJSON(Composite *root)
+{
+    QJsonObject obj;
+    QJsonArray arr;
+    for(int i = 0; i < root->subitemsCount(); i++)
+    {
+
+
+        if(root->child(i)->type() == "Menu")
+        {
+            Menu *temp = dynamic_cast<Menu*>(root->child(i));
+            obj["type"] = "Menu";
+            obj["title"] = temp->title().c_str();
+            obj["children"] = writeToJSON(root->child(i));
+        }
+        else
+        {
+            MenuItem *temp = dynamic_cast<MenuItem*>(root->child(i));
+            obj["type"] = "MenuItem";
+            obj["title"] = temp->title().c_str();
+            obj["price"] = temp->price();
+            obj["description"] = temp->description().c_str();
+
+        }
+        arr.append(obj);
+    }
+    return arr;
+}
+
+void MainWindow::on_action_Save_triggered()
+{
+    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."),0,
+                                             tr("JSON files (*.json)"));
+    if(lFileName.isEmpty())
+        return;
+    QJsonObject mainJSONObj;
+
+    mainJSONObj["type"] = "Menu";
+    mainJSONObj["title"] = "MAIN MENU";
+    mainJSONObj["children"] = writeToJSON(mRoot);
+
+
+    QJsonDocument mainDoc(mainJSONObj);
+
+    QFile jsonFile(lFileName);
+        jsonFile.open(QFile::WriteOnly);
+        jsonFile.write(mainDoc.toJson());
+}
 
 void MainWindow::createMenu()
 {
@@ -213,3 +262,7 @@ void MainWindow::createMenu()
 
     mRoot->addSubitem(lBeveragesMenu);
 }
+
+
+
+

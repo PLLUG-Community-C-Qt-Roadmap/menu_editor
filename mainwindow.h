@@ -29,9 +29,11 @@ private slots:
     void slotSaveEditedItem();
 
     void on_action_Open_triggered();
+    void on_action_Save_triggered();
 
 private:
     void createMenu();
+    QJsonArray writeToJSON(Composite *root);
 
 private:
     Ui::MainWindow *ui;
