@@ -128,7 +128,7 @@ void MainWindow::readFromJSON(const QJsonObject &json, Composite *pRoot)
         else if(!subitemsArray[index].toObject()["type"].toString().compare("MenuItem"))
         {
 
-            int lPrice = subitemsArray[index].toObject()["price"].toDouble();
+            double lPrice = subitemsArray[index].toObject()["price"].toDouble();
             std::string lDescription = subitemsArray[index].toObject()["description"].toString().toStdString();
             std::string lTitle = subitemsArray[index].toObject()["title"].toString().toStdString();
 
@@ -208,7 +208,7 @@ QJsonArray MainWindow::writeToJSON(Composite *root)
 
 void MainWindow::on_action_Save_triggered()
 {
-    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."),"Menu",
+    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."), "Menu",
                                              tr("JSON files (*.json)"));
     if(lFileName.isEmpty())
         return;
