@@ -147,8 +147,8 @@ void MainWindow::readFromJSON(const QJsonObject &json, Composite *pRoot)
 
 void MainWindow::on_action_Open_triggered()
 {
-    QString lFileName = QFileDialog::getOpenFileName(this, tr("Open file.."), QDir::homePath(),
-                                                     tr("JSON files (*.json)"));
+    QString lFileName = QFileDialog::getOpenFileName(this, tr("Open file.."),
+                        QDir::currentPath(), tr("JSON files (*.json)"));
     if(lFileName.isEmpty())
     {
         return;
