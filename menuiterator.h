@@ -20,6 +20,7 @@ public:
 private:
     void addChildrenForTraversal(Composite *container);
 
+
 private:
     std::stack<Composite *> mItemsStack;
 };

@@ -26,8 +26,12 @@ public:
 
     virtual void accept(MenuVisitor *visitor) = 0;
 
+    std::string type() const;
+    void setType(const std::string &typ);
+
 private:
     std::string mTitle;
+    std::string mType;
     Composite *mParent;
     std::vector<Composite *> mListSubitems;
 };

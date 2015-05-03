@@ -78,3 +78,17 @@ void Composite::setTitle(const std::string &title)
 {
     mTitle = title;
 }
+
+std::string Composite::type() const
+{
+    return mType;
+}
+
+void Composite::setType(const std::string &type)
+{
+    mType = type;
+}
+
+
+
+

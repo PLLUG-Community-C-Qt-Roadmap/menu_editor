@@ -14,7 +14,9 @@
 #include <QJsonDocument>
 #include <QJsonArray>
 #include <QJsonObject>
-
+#include <QDebug>
+#include <typeinfo>
+#include <cxxabi.h>
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow),
