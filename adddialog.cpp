@@ -4,7 +4,7 @@
 #include "menu.h"
 #include "menuitem.h"
 
-enum MenuItemType{MenuType = 0, MenuItemType};
+enum MenuItemType{MenuType = 0, MenuItemType, DiscountMenuItemType};
 
 AddDialog::AddDialog(QWidget *parent) :
     QDialog(parent),

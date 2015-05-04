@@ -24,6 +24,7 @@ public:
 
 public slots:
     void slotSave();
+    void slotDiscountCheckboxStateChanged(int state);
 
 signals:
     void itemChanged();

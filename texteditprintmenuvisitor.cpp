@@ -70,16 +70,24 @@ void TextEditPrintMenuVisitor::visit(DiscountMenuItem *discountItem)
 {
     QString outString;
 
-    //QString lIndentString = indent(discountItem);
+    QString lIndentString = indent(discountItem);
 
-    outString = QString("!!!Discount!!! > %1    %2$ !!!Discount!!!").arg(discountItem->title().c_str())
+//    Composite *lRootMenu = discountItem->parent();
+//    while(lRootMenu->parent())
+//    {
+//        lRootMenu = lRootMenu->parent();
+//    }
+//    QString lIndentString = indent(lRootMenu);
+
+    outString = QString("%1 !!!Discount!!! > %2    %3$ !!!Discount!!!").arg(lIndentString).arg(discountItem->title().c_str())
             .arg(discountItem->price() - discountItem->discount());
     mTextEdit->appendPlainText(outString);
 
     if (!discountItem->description().empty())
     {
         QString description;
-        description = QString("   ::::%1::::").arg(discountItem->description().c_str());
+        description = QString("%1   ::::%2::::").arg(lIndentString)
+                .arg(discountItem->description().c_str());
         mTextEdit->appendPlainText(description);
     }
 }

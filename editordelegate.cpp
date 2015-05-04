@@ -10,9 +10,15 @@ EditorDelegate::EditorDelegate(QWidget *parent) :
     ui(new Ui::EditorDelegate)
 {
     ui->setupUi(this);
+    //ui->discountLabel->setVisible(false);
+    //ui->DiscountSpinBox->setVisible(false);
+
     connect(ui->menuItemNameLineEdit, SIGNAL(textChanged(QString)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
     connect(ui->menuItemDescriptionLineEdit, SIGNAL(textChanged(QString)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
     connect(ui->menuItemPriceSpinBox, SIGNAL(valueChanged(double)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
+    connect(ui->DiscountSpinBox, SIGNAL(valueChanged(double)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
+    connect(ui->discountCheckBox, SIGNAL(stateChanged(int)), this, SIGNAL(itemChanged()), Qt::UniqueConnection);
+    connect(ui->discountCheckBox, SIGNAL(stateChanged(int)), this, SLOT(slotDiscountCheckboxStateChanged(int)), Qt::UniqueConnection);
 }
 
 EditorDelegate::~EditorDelegate()
@@ -54,11 +60,13 @@ void EditorDelegate::visit(DiscountMenuItem * discountItem)
     blockSignals(true);
 
     clear();
+    ui->discountCheckBox->setChecked(true);
 
     ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
     ui->menuItemNameLineEdit->setText(discountItem->title().c_str());
     ui->menuItemDescriptionLineEdit->setText(discountItem->description().c_str());
     ui->menuItemPriceSpinBox->setValue(discountItem->price());
+    ui->DiscountSpinBox->setValue(discountItem->discount());
 
     mEditedMenuItem = discountItem;
 
@@ -69,6 +77,9 @@ void EditorDelegate::clear()
 {
     mEditedMenu = nullptr;
     mEditedMenuItem = nullptr;
+
+    ui->discountCheckBox->setChecked(false);
+    ui->DiscountSpinBox->setValue(0);
 }
 
 void EditorDelegate::slotSave()
@@ -78,5 +89,19 @@ void EditorDelegate::slotSave()
         mEditedMenuItem->setTitle(ui->menuItemNameLineEdit->text().toStdString());
         mEditedMenuItem->setDescription(ui->menuItemDescriptionLineEdit->text().toStdString());
         mEditedMenuItem->setPrice(ui->menuItemPriceSpinBox->value());
+    }
+}
+
+void EditorDelegate::slotDiscountCheckboxStateChanged(int state)
+{
+    if(state)
+    {
+        ui->discountLabel->setVisible(true);
+        ui->DiscountSpinBox->setVisible(true);
+    }
+    else
+    {
+        ui->discountLabel->setVisible(false);
+        ui->DiscountSpinBox->setVisible(false);
     }
 }
