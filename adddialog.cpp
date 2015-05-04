@@ -3,6 +3,7 @@
 
 #include "menu.h"
 #include "menuitem.h"
+#include "discountmenuitem.h"
 
 enum MenuItemType{MenuType = 0, MenuItemType, DiscountMenuItemType};
 
@@ -18,6 +19,7 @@ AddDialog::AddDialog(QWidget *parent) :
 
     ui->typeComboBox->addItem("Menu Item", MenuItemType);
     ui->typeComboBox->addItem("Menu", MenuType);
+    ui->typeComboBox->addItem("Discount Menu Item", DiscountMenuItemType);
 
     connect(ui->backPushButton, SIGNAL(clicked(bool)), this, SLOT(slotBackClicked()), Qt::UniqueConnection);
     connect(ui->cancelPushButton_2, SIGNAL(clicked(bool)), this, SLOT(slotCancelClicked()), Qt::UniqueConnection);
@@ -73,6 +75,8 @@ void AddDialog::slotNextClicked()
     case MenuItemType:
         mNewItem = new MenuItem("", 0.0);
         break;
+    case DiscountMenuItemType:
+        mNewItem = new DiscountMenuItem("", 0.0, 0.0);
     default:
         break;
     }

@@ -259,7 +259,7 @@ void MainWindow::createMenu()
     lWinesMenu->addSubitem(new MenuItem("Champagne", 16.5));
     lAlcoDrinksMenu->addSubitem(lWinesMenu);
     lAlcoDrinksMenu->addSubitem(new MenuItem("Beer", 5));
-    lAlcoDrinksMenu->addSubitem(new DiscountMenuItem("Beer", 5, 0.15));
+    lAlcoDrinksMenu->addSubitem(new DiscountMenuItem("Whiskey", 5, 0.15));
     lBeveragesMenu->addSubitem(lAlcoDrinksMenu);
 
     mRoot->addSubitem(lBeveragesMenu);
