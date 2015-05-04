@@ -63,15 +63,23 @@
      <height>21</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="action_Add"/>
+    <addaction name="action_Remove"/>
+   </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
-     <string>&amp;Fi&amp;le</string>
+     <string>&amp;File</string>
     </property>
     <addaction name="action_Open"/>
     <addaction name="action_Save"/>
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
+<<<<<<< HEAD
    <widget class="QMenu" name="menuEdit">
     <property name="title">
      <string>&amp;Edit</string>
@@ -87,6 +95,8 @@
     <addaction name="actionAbout_Menu_Editor"/>
     <addaction name="actionAbout_Qt"/>
    </widget>
+=======
+>>>>>>> b453ef6116d54b931bbe2c0d5ae263c74ddacb57
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
    <addaction name="menuHelp"/>
@@ -105,10 +115,16 @@
    <property name="text">
     <string>&amp;Open...</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="action_Save">
    <property name="text">
     <string>&amp;Save...</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
   <action name="action_Exit">

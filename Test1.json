@@ -1,0 +1,36 @@
+{
+    "type": "Menu",
+    "title": "MAIN MENU",
+    "children":[
+        {
+            "type": "Menu",
+            "title": "Beverages",
+            "children": [
+                {
+                    "type": "Menu",
+                    "title": "Alco drinks",
+                    "children": [
+                        {
+                            "type": "MenuItem",
+                            "title": "Beer",
+                            "price": 10,
+                            "description": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Menu",
+            "title": "Pizza",
+            "children": [
+                {
+                    "type": "MenuItem",
+                    "title": "Pizza paperoni",
+                    "price": 10,
+                    "description": "With tomatos"
+                }
+            ]
+        }
+    ]
+}

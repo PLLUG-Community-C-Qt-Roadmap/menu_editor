@@ -6,6 +6,17 @@
 #include "menu.h"
 #include "menuitem.h"
 #include "adddialog.h"
+#include <QFileDialog>
+#include <QFile>
+#include <QDir>
+#include <QMessageBox>
+#include <QByteArray>
+#include <QJsonDocument>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QDebug>
+#include <QString>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -92,6 +103,131 @@ void MainWindow::slotSaveEditedItem()
     slotUpdateMenu();
 }
 
+void MainWindow::readFromJSON(const QJsonObject &json, Composite *pRoot)
+{
+    Composite *newMenu;
+
+    // If pRoot isn't first element
+    if(pRoot)
+    {
+        newMenu = new Menu(json["title"].toString().toStdString());
+    }
+    else
+    {
+        mRoot = new Menu(json["title"].toString().toStdString());
+        newMenu = mRoot;
+    }
+
+    QJsonArray subitemsArray = json["children"].toArray();
+    for (int index = 0;index < subitemsArray.size(); ++index)
+    {
+        if(!subitemsArray[index].toObject()["type"].toString().compare("Menu"))
+        {
+            // Filling newMenu recursively with items
+            readFromJSON(subitemsArray[index].toObject(), newMenu);
+
+        }
+        else if(!subitemsArray[index].toObject()["type"].toString().compare("MenuItem"))
+        {
+
+            double lPrice = subitemsArray[index].toObject()["price"].toDouble();
+            std::string lDescription = subitemsArray[index].toObject()["description"].toString().toStdString();
+            std::string lTitle = subitemsArray[index].toObject()["title"].toString().toStdString();
+
+            newMenu->addSubitem( new MenuItem(lTitle, lPrice, lDescription));
+        }
+
+    }
+
+    if(pRoot)
+    {
+        // Adding newMenu as subitem to pRoot
+        pRoot->addSubitem(newMenu);
+    }
+
+}
+
+void MainWindow::on_action_Open_triggered()
+{
+    QString lFileName = QFileDialog::getOpenFileName(this, tr("Open file.."),
+                        QDir::currentPath(), tr("JSON files (*.json)"));
+    if(lFileName.isEmpty())
+    {
+        return;
+    }
+
+    QFile lFile(lFileName);
+
+    if(lFile.open(QIODevice::ReadOnly))
+    {
+
+        QByteArray loadedData = lFile.readAll();
+        lFile.close();
+
+        QJsonDocument loadedJSON = QJsonDocument::fromJson(loadedData);
+
+        delete mRoot;
+
+        readFromJSON(loadedJSON.object(), nullptr);
+
+        slotUpdateMenu();
+    }
+    else
+    {
+        QMessageBox::warning(this, tr("Error"),
+              QString(tr("Could not open file %1 for reading")).arg(lFile.fileName()),
+              QMessageBox::Ok);
+    }
+}
+QJsonArray MainWindow::writeToJSON(Composite *root)
+{
+    QJsonObject obj;
+    QJsonArray arr;
+    for(int i = 0; i < root->subitemsCount(); i++)
+    {
+
+
+        if(root->child(i)->type() == "Menu")
+        {
+            Menu *temp = dynamic_cast<Menu*>(root->child(i));
+            obj["type"] = "Menu";
+            obj["title"] = temp->title().c_str();
+            obj["children"] = writeToJSON(root->child(i));
+        }
+        else
+        {
+            MenuItem *temp = dynamic_cast<MenuItem*>(root->child(i));
+            obj["type"] = "MenuItem";
+            obj["title"] = temp->title().c_str();
+            obj["price"] = temp->price();
+            obj["description"] = temp->description().c_str();
+
+        }
+        arr.append(obj);
+    }
+    return arr;
+}
+
+void MainWindow::on_action_Save_triggered()
+{
+    QString lFileName = QFileDialog::getSaveFileName(this, tr("Save file.."), "Menu",
+                                             tr("JSON files (*.json)"));
+    if(lFileName.isEmpty())
+        return;
+    QJsonObject mainJSONObj;
+
+    mainJSONObj["type"] = "Menu";
+    mainJSONObj["title"] = "MAIN MENU";
+    mainJSONObj["children"] = writeToJSON(mRoot);
+
+
+    QJsonDocument mainDoc(mainJSONObj);
+
+    QFile jsonFile(lFileName);
+        jsonFile.open(QFile::WriteOnly);
+        jsonFile.write(mainDoc.toJson());
+}
+
 void MainWindow::createMenu()
 {
     mRoot = new Menu("MAIN MENU");
@@ -129,8 +265,13 @@ void MainWindow::createMenu()
     mRoot->addSubitem(lBeveragesMenu);
 }
 
+<<<<<<< HEAD
 void MainWindow::slotAboutProgram()
 {
     QMessageBox::about(this,tr("About"), QString("%1 v. %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
 }
+=======
+
+
+>>>>>>> b453ef6116d54b931bbe2c0d5ae263c74ddacb57
 
