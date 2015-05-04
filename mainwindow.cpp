@@ -26,9 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     resize(800, 600);
 
-    createMenu();
-    slotUpdateMenu();
-
     connect(ui->menuComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(menuElementSelected()), Qt::UniqueConnection);
     connect(ui->action_Add, SIGNAL(triggered(bool)),
@@ -263,6 +260,11 @@ void MainWindow::createMenu()
     mRoot->addSubitem(lBeveragesMenu);
 }
 
-
-
-
+void MainWindow::on_actionView_Example_Menu_triggered()
+{
+    ui->menuComboBox->clear();
+    ui->savePushButton->setEnabled(false);
+    ui->menuTextEdit->clear();
+    createMenu();
+    slotPrintMenu();
+}
