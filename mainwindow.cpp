@@ -5,6 +5,7 @@
 #include "menuiterator.h"
 #include "menu.h"
 #include "menuitem.h"
+#include "discountmenuitem.h"
 #include "adddialog.h"
 #include <QFileDialog>
 #include <QFile>
@@ -258,6 +259,7 @@ void MainWindow::createMenu()
     lWinesMenu->addSubitem(new MenuItem("Champagne", 16.5));
     lAlcoDrinksMenu->addSubitem(lWinesMenu);
     lAlcoDrinksMenu->addSubitem(new MenuItem("Beer", 5));
+    lAlcoDrinksMenu->addSubitem(new DiscountMenuItem("Beer", 5, 0.15));
     lBeveragesMenu->addSubitem(lAlcoDrinksMenu);
 
     mRoot->addSubitem(lBeveragesMenu);

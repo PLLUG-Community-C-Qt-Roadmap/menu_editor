@@ -3,6 +3,7 @@
 #include <QPlainTextEdit>
 
 #include "menuitem.h"
+#include "discountmenuitem.h"
 #include "menu.h"
 
 TextEditPrintMenuVisitor::TextEditPrintMenuVisitor(QPlainTextEdit *textEdit)
@@ -63,4 +64,22 @@ void TextEditPrintMenuVisitor::visit(Menu *menu)
     QString lIndentString = indent(menu);
     outString = QString("%2[%1]").arg(menu->title().c_str()).arg(lIndentString);
     mTextEdit->appendPlainText(outString);
+}
+
+void TextEditPrintMenuVisitor::visit(DiscountMenuItem *discountItem)
+{
+    QString outString;
+
+    //QString lIndentString = indent(discountItem);
+
+    outString = QString("!!!Discount!!! > %1    %2$ !!!Discount!!!").arg(discountItem->title().c_str())
+            .arg(discountItem->price() - discountItem->discount());
+    mTextEdit->appendPlainText(outString);
+
+    if (!discountItem->description().empty())
+    {
+        QString description;
+        description = QString("   ::::%1::::").arg(discountItem->description().c_str());
+        mTextEdit->appendPlainText(description);
+    }
 }

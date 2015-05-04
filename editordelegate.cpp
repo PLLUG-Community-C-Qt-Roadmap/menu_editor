@@ -3,6 +3,7 @@
 
 #include "menu.h"
 #include "menuitem.h"
+#include "discountmenuitem.h"
 
 EditorDelegate::EditorDelegate(QWidget *parent) :
     QWidget(parent),
@@ -44,6 +45,22 @@ void EditorDelegate::visit(Menu *menu)
     ui->stackedWidget->setCurrentWidget(ui->pageMenu);
 
     mEditedMenu = menu;
+
+    blockSignals(false);
+}
+
+void EditorDelegate::visit(DiscountMenuItem * discountItem)
+{
+    blockSignals(true);
+
+    clear();
+
+    ui->stackedWidget->setCurrentWidget(ui->pageMenuItem);
+    ui->menuItemNameLineEdit->setText(discountItem->title().c_str());
+    ui->menuItemDescriptionLineEdit->setText(discountItem->description().c_str());
+    ui->menuItemPriceSpinBox->setValue(discountItem->price());
+
+    mEditedMenuItem = discountItem;
 
     blockSignals(false);
 }

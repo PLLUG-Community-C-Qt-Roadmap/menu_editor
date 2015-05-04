@@ -18,6 +18,7 @@ public:
 
     virtual void visit(MenuItem *);
     virtual void visit(Menu *);
+    virtual void visit(DiscountMenuItem *);
 
     void clear();
 
