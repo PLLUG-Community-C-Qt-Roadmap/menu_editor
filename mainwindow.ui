@@ -69,6 +69,7 @@
     </property>
     <addaction name="action_Add"/>
     <addaction name="action_Remove"/>
+    <addaction name="actionView_Example_Menu"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -145,6 +146,7 @@
     <string>&amp;Remove</string>
    </property>
   </action>
+<<<<<<< HEAD
   <action name="actionAbout_Menu_Editor">
    <property name="text">
     <string>&amp;About Menu Editor</string>
@@ -153,6 +155,14 @@
   <action name="actionAbout_Qt">
    <property name="text">
     <string>About &amp;Qt</string>
+=======
+  <action name="actionView_Example_Menu">
+   <property name="text">
+    <string>View Example Menu</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
+>>>>>>> 7fc71f2febf8b31fd6550623fd3d208f1f5925c6
    </property>
   </action>
  </widget>

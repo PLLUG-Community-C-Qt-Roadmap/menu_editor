@@ -26,9 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     resize(800, 600);
 
-    createMenu();
-    slotUpdateMenu();
-
     connect(ui->menuComboBox, SIGNAL(currentIndexChanged(int)),
             this, SLOT(menuElementSelected()), Qt::UniqueConnection);
     connect(ui->action_Add, SIGNAL(triggered(bool)),
@@ -266,6 +263,7 @@ void MainWindow::createMenu()
 }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 void MainWindow::slotAboutProgram()
 {
     QMessageBox::about(this,tr("About"), QString("%1 v. %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
@@ -275,3 +273,13 @@ void MainWindow::slotAboutProgram()
 
 >>>>>>> b453ef6116d54b931bbe2c0d5ae263c74ddacb57
 
+=======
+void MainWindow::on_actionView_Example_Menu_triggered()
+{
+    ui->menuComboBox->clear();
+    ui->savePushButton->setEnabled(false);
+    ui->menuTextEdit->clear();
+    createMenu();
+    slotPrintMenu();
+}
+>>>>>>> 7fc71f2febf8b31fd6550623fd3d208f1f5925c6

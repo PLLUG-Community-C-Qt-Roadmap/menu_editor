@@ -35,6 +35,8 @@ private slots:
     void on_action_Open_triggered();
     void on_action_Save_triggered();
 
+    void on_actionView_Example_Menu_triggered();
+
 private:
     void createMenu();
     QJsonArray writeToJSON(Composite *root);
