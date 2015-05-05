@@ -30,7 +30,8 @@ SOURCES += main.cpp\
     texteditprintmenuvisitor.cpp \
     menucombobox.cpp \
     editordelegate.cpp \
-    adddialog.cpp
+    adddialog.cpp \
+    discountmenuitem.cpp
 
 HEADERS  += mainwindow.h \
     consoleprintmenuvisitor.h \
@@ -42,7 +43,8 @@ HEADERS  += mainwindow.h \
     texteditprintmenuvisitor.h \
     menucombobox.h \
     editordelegate.h \
-    adddialog.h
+    adddialog.h \
+    discountmenuitem.h
 
 FORMS    += mainwindow.ui \
     editordelegate.ui \

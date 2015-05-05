@@ -16,6 +16,7 @@ public:
     TextEditPrintMenuVisitor(QPlainTextEdit *textEdit);
     void visit(MenuItem *item);
     void visit(Menu *menu);
+    void visit(DiscountMenuItem *discountItem);
 
 private:
     QPlainTextEdit *mTextEdit;

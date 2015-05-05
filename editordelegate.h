@@ -18,11 +18,13 @@ public:
 
     virtual void visit(MenuItem *);
     virtual void visit(Menu *);
+    virtual void visit(DiscountMenuItem *);
 
     void clear();
 
 public slots:
     void slotSave();
+    void slotDiscountCheckboxStateChanged(int state);
 
 signals:
     void itemChanged();
