@@ -69,6 +69,7 @@
     </property>
     <addaction name="action_Add"/>
     <addaction name="action_Remove"/>
+    <addaction name="actionView_Example_Menu"/>
    </widget>
    <widget class="QMenu" name="menuFile">
     <property name="title">
@@ -79,8 +80,24 @@
     <addaction name="separator"/>
     <addaction name="action_Exit"/>
    </widget>
+   <widget class="QMenu" name="menuEdit">
+    <property name="title">
+     <string>&amp;Edit</string>
+    </property>
+    <addaction name="action_Add"/>
+    <addaction name="action_Remove"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>&amp;Help</string>
+    </property>
+    <addaction name="separator"/>
+    <addaction name="actionAbout_Menu_Editor"/>
+    <addaction name="actionAbout_Qt"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuEdit"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -124,6 +141,16 @@
   <action name="action_Remove">
    <property name="text">
     <string>&amp;Remove</string>
+   </property>
+  </action>
+  <action name="actionAbout_Menu_Editor">
+   <property name="text">
+    <string>&amp;About Menu Editor</string>
+   </property>
+  </action>
+  <action name="actionAbout_Qt">
+   <property name="text">
+    <string>About &amp;Qt</string>
    </property>
   </action>
  </widget>

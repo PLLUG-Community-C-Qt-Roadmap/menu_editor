@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QMessageBox>
+
 namespace Ui {
 class MainWindow;
 }
@@ -18,8 +20,10 @@ public:
 
 public slots:
     void slotPrintMenu();
+    void slotAboutProgram();
 
 private slots:
+
     void menuElementSelected();
 
     void slotUpdateMenu();
@@ -30,6 +34,8 @@ private slots:
 
     void on_action_Open_triggered();
     void on_action_Save_triggered();
+
+    void on_actionView_Example_Menu_triggered();
 
 private:
     void createMenu();
