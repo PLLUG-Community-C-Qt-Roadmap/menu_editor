@@ -16,6 +16,7 @@
 #include <QJsonObject>
 #include <QDebug>
 #include <QString>
+#include <QTreeWidget>
 
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -34,8 +35,8 @@ MainWindow::MainWindow(QWidget *parent) :
             this, SLOT(slotSaveEditedItem()), Qt::UniqueConnection);
     connect(ui->menuEditorDelegate, SIGNAL(itemChanged()),
             this, SLOT(slotItemChanged()), Qt::UniqueConnection);
-    connect(ui->actionAbout_Menu_Editor, SIGNAL(triggered(bool)), this, SLOT(slotAboutProgram()));
-    connect(ui->actionAbout_Qt, SIGNAL(triggered(bool)), qApp, SLOT(aboutQt()));
+    //connect(ui->actionAbout_Menu_Editor, SIGNAL(triggered(bool)), this, SLOT(slotAboutProgram()));
+    //connect(ui->actionAbout_Qt, SIGNAL(triggered(bool)), qApp, SLOT(aboutQt()));
 }
 
 MainWindow::~MainWindow()
@@ -262,18 +263,18 @@ void MainWindow::createMenu()
     mRoot->addSubitem(lBeveragesMenu);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
+//<<<<<<< HEAD
+//<<<<<<< HEAD
 void MainWindow::slotAboutProgram()
 {
     QMessageBox::about(this,tr("About"), QString("%1 v. %2").arg(qApp->applicationName()).arg(qApp->applicationVersion()));
 }
-=======
+//=======
 
 
->>>>>>> b453ef6116d54b931bbe2c0d5ae263c74ddacb57
+//>>>>>>> b453ef6116d54b931bbe2c0d5ae263c74ddacb57
 
-=======
+//=======
 void MainWindow::on_actionView_Example_Menu_triggered()
 {
     ui->menuComboBox->clear();
@@ -282,4 +283,4 @@ void MainWindow::on_actionView_Example_Menu_triggered()
     createMenu();
     slotPrintMenu();
 }
->>>>>>> 7fc71f2febf8b31fd6550623fd3d208f1f5925c6
+//>>>>>>> 7fc71f2febf8b31fd6550623fd3d208f1f5925c6

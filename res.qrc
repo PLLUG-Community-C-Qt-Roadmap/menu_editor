@@ -1,2 +1,12 @@
-<RCC/>
-
+<RCC>
+    <qresource prefix="/res">
+        <file>res/remove.png</file>
+        <file>res/open.png</file>
+        <file>res/save_as.png</file>
+        <file>res/Example.png</file>
+        <file>res/logo.png</file>
+        <file>res/exit.png</file>
+        <file>res/add.png</file>
+        <file>res/main.jpg</file>
+    </qresource>
+</RCC>

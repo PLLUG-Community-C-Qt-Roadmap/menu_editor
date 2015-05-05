@@ -47,3 +47,6 @@ HEADERS  += mainwindow.h \
 FORMS    += mainwindow.ui \
     editordelegate.ui \
     adddialog.ui
+
+RESOURCES += \
+    res.qrc
